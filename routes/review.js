@@ -3,21 +3,8 @@ const router = express.Router({ mergeParams: true });
 const Listing = require("../models/listing");
 const Review = require("../models/review");
 const {isloggedIn} = require("../middleware"); 
-
+const reviewsController = require("../controllers/review.js");
 // Add review to a listing
-router.post("/", isloggedIn, async (req, res) => {
-    const listing = await Listing.findById(req.params.id);
-    const newReview = new Review(req.body.review);
-
-    if (!newReview.rating) {
-        newReview.rating = 3;
-    }
-
-    listing.reviews.push(newReview);
-    await newReview.save();
-    await listing.save();
-
-    res.redirect(`/listings/${listing._id}`);
-});
+router.post("/", isloggedIn,reviewsController.addReview);
 
 module.exports = router;
