@@ -1,0 +1,94 @@
+.navbar-brand{
+    font-size: 5rem;
+}
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+
+.f-info-socials {
+    margin-right: 2rem;
+}
+
+.f-info{
+    height: 3rem;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem !important;
+}
+  
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+  
+  .card-img-top:hover {
+    opacity: 0.7;
+  }
+  
+  .card-body {
+    padding:0%  !important;
+  }
+  
+  .card-text {
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .listing-link{ 
+    text-decoration: none !important ;
+  }
+/* rating wala part */
+.rating-wrapper {
+  display: inline-flex;
+  direction: rtl !important;
+}
+
+/* Flattened nested selectors for .rating-wrapper */
+.rating-wrapper label {
+  color: #E1E6F6;
+  cursor: pointer;
+  font-size: 3rem;
+  transition: color 0.5s;
+}
+
+.rating-wrapper svg {
+  -webkit-text-fill-color: transparent;
+  -webkit-filter: drop-shadow(4px 1px 6px rgba(198, 206, 237, 1));
+  filter: drop-shadow(5px 1px 3px rgba(198, 206, 237, 1));
+}
+
+.rating-wrapper input {
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.rating-wrapper label:hover,
+.rating-wrapper label:hover ~ label,
+.rating-wrapper input:checked ~ label {
+  color: #34AC9E;
+}

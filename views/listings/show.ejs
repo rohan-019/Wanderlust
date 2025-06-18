@@ -1,0 +1,102 @@
+<% layout("layouts/boilerplate") -%>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4">
+        <img src="<%= listing.imageUrl %>" class="card-img-top rounded-top-4" alt="Listing Image" style="object-fit: cover; height: 300px;" />
+
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4"><%= listing.title %></h2>
+
+          <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item"><strong>Owner:</strong> <%= listing.owner.username %></li>
+            <li class="list-group-item"><strong>Description:</strong> <%= listing.description %></li>
+            <li class="list-group-item"><strong>Price:</strong> ₹<%= listing.price.toLocaleString("en-IN") %></li>
+            <li class="list-group-item"><strong>Location:</strong> <%= listing.location %></li>
+            <li class="list-group-item"><strong>Country:</strong> <%= listing.country %></li>
+          </ul>
+          <% if(currentUser && currentUser._id.equals(listing.owner._id)) { %>
+          <div class="d-flex justify-content-between">
+            <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-primary px-4">
+              Edit Listing
+            </a>
+
+            <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger px-4 rounded-pill" onclick="return confirm('Are you sure you want to delete this listing?');">
+                Delete Listing
+              </button>
+            </form>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="container py-5 col-lg-8">
+    <% if (currentUser) { %>
+    <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation"> 
+      <h4>Leave a Review</h4>           
+  <!-- star rating -->
+  <div class="rating-wrapper">
+    <!-- star 5 -->
+    <input type="radio" id="5-star-rating" name="review[rating]" value="5">
+    <label for="5-star-rating" class="star-rating">
+      <i class="fas fa-star d-inline-block"></i>
+    </label>
+
+    <!-- star 4 -->
+    <input type="radio" id="4-star-rating" name="review[rating]" value="4">
+    <label for="4-star-rating" class="star-rating">
+      <i class="fas fa-star d-inline-block"></i>
+    </label>
+
+    <!-- star 3 -->
+    <input type="radio" id="3-star-rating" name="review[rating]" value="3">
+    <label for="3-star-rating" class="star-rating">
+      <i class="fas fa-star d-inline-block"></i>
+    </label>
+
+    <!-- star 2 -->
+    <input type="radio" id="2-star-rating" name="review[rating]" value="2">
+    <label for="2-star-rating" class="star-rating">
+      <i class="fas fa-star d-inline-block"></i>
+    </label>
+
+    <!-- star 1 -->
+    <input type="radio" id="1-star-rating" name="review[rating]" value="1">
+    <label for="1-star-rating" class="star-rating">
+      <i class="fas fa-star d-inline-block"></i>
+    </label>
+  </div>
+
+  <!-- comment box -->
+  <div class="mb-3">
+    <label for="comment" class="form-label"><b>Comment</b></label>
+    <textarea id="comment" name="review[comments]" class="form-control" rows="3" required></textarea>
+    <div class="invalid-feedback">
+      Please Write some comments about the listing. 
+    </div>
+  </div>
+
+  <button class="btn btn-primary">Submit</button>
+</form>
+<% } %>
+<hr />
+<h4>All Reviews</h4>
+
+<div class="row">
+  <% for(review of listing.reviews){ %>
+  <div class="card col-5 ms-3 mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text"><%= review.comments %></p>
+      <p class="card-text"><%= review.rating %> stars</p>
+    </div>
+  </div>
+  <% } %>
+</div>
+
+  </div>
+

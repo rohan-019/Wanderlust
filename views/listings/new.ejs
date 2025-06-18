@@ -1,0 +1,66 @@
+<%- layout("layouts/boilerplate") %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow border-0 rounded-4">
+        <div class="card-body p-5">
+          <h2 class="text-center mb-4">Create New Listing</h2>
+
+          <form action="/listings" method="POST" novalidate class="needs-validation">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" id="title" name="title" class="form-control" placeholder="Listing Title" required>
+                  <label for="title">Title</label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="url" id="imageUrl" name="imageUrl" class="form-control" required>
+                  <label for="imageUrl">Image URL</label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="form-floating">
+                  <textarea id="description" name="description" class="form-control" placeholder="Description" style="height: 150px" required></textarea>
+                  <label for="description">Description</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input type="number" id="price" name="price" class="form-control" placeholder="Price" min="0" required>
+                  <label for="price">Price (INR)</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input type="text" id="location" name="location" class="form-control" placeholder="Location" required>
+                  <label for="location">Location</label>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input type="text" id="country" name="country" class="form-control" placeholder="Country" required>
+                  <label for="country">Country</label>
+                </div>
+              </div>
+
+              <div class="col-12 text-center pt-3">
+                <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill">
+                  Add Listing
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
