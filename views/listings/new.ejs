@@ -7,7 +7,7 @@
         <div class="card-body p-5">
           <h2 class="text-center mb-4">Create New Listing</h2>
 
-          <form action="/listings" method="POST" novalidate class="needs-validation">
+          <form action="/listings" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
             <div class="row g-4">
               <div class="col-md-6">
                 <div class="form-floating">
@@ -16,10 +16,11 @@
                 </div>
               </div>
 
+
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="url" id="imageUrl" name="imageUrl" class="form-control" required>
-                  <label for="imageUrl">Image URL</label>
+                  <input type="file" id="image" name="image" class="form-control" required>
+                  <label for="image">Upload image</label>
                 </div>
               </div>
 

@@ -11,7 +11,10 @@ module.exports.newListing = (req, res) => {
 
 module.exports.createListing = async (req, res) => {
     try {
-        const newListing = new Listing({ ...req.body, owner: req.user._id });
+        let url = req.file.path;
+        let filename = req.file.filename;
+        console.log("File uploaded to Cloudinary:", url,"  ..  ", filename);
+        const newListing = new Listing({ ...req.body, owner: req.user._id, imageUrl: { url, filename } });
         await newListing.save();
         req.flash("success", "Listing created successfully!");
         res.redirect("/listings");
@@ -39,11 +42,24 @@ module.exports.renderEditForm = async (req, res) => {
 }
 
 module.exports.updateListing = async (req, res) => {
-    const { id } = req.params;
-    await Listing.findByIdAndUpdate(id, req.body, { new: true });
-    req.flash("success", "Listing updated successfully!");
-    res.redirect(`/listings/${id}`);
-}
+  const { id } = req.params;
+
+  let updatedData = { ...req.body };
+
+  // ✅ Only update imageUrl if a new image was uploaded
+  if (req.file) {
+    updatedData.imageUrl = {
+      url: req.file.path,
+      filename: req.file.filename
+    };
+    console.log("File uploaded to Cloudinary:", updatedData.imageUrl.url, "  ..  ", updatedData.imageUrl.filename);
+  }
+
+  await Listing.findByIdAndUpdate(id, updatedData, { new: true });
+
+  req.flash("success", "Listing updated successfully!");
+  res.redirect(`/listings/${id}`);
+};
 
 module.exports.destroyListing = async (req, res) => {
     const { id } = req.params;

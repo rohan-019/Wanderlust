@@ -8,9 +8,8 @@ const ListingSchema = new Schema({
     },
     description: String,
     imageUrl: {
-        type: String,
-        required: [true, "Image URL is required"],
-        set: (v) => v === "" ? undefined : v
+        url: String,
+        filename: String
     },
     price: Number,
     location: String,
