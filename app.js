@@ -83,7 +83,7 @@ app.use("/listings/:id/reviews", reviewRouter); // ✅ Mount review router
 app.use("/", userRouter); // Assuming you have a user router
 
 app.get("/", (req, res) => {
-    res.send("Server is la la working");
+    res.redirect("/listings");
 });
 
 app.listen(8080, () => {
