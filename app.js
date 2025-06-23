@@ -10,13 +10,27 @@ const path = require("path");
 const ejsmate = require("ejs-mate");
 const methodOverride = require('method-override');
 const session = require('express-session');
+const mongoStore = require('connect-mongo'); // For storing sessions in MongoDB
 const flash = require('connect-flash');
 const passport = require('passport');
 const User = require('./models/user'); // Assuming you have a User model
 const LocalStrategy = require('passport-local').Strategy;
 
+const store = mongoStore.create({
+    mongoUrl: process.env.ATLAS_URL,
+    crypto: {
+        secret: process.env.SECRET // Change this to a strong secret in production
+    },
+    touchAfter: 24 * 60 * 60, // 24 hours
+})
+
+store.on("error", function(e) {
+    console.log("Session store error", e);
+});
+
 const sessionOptions = {
-    secret: 'thisshouldbeasecret',  // Change this to a strong secret in production
+    store,
+    secret: process.env.SECRET,  // Change this to a strong secret in production
     resave: false,
     saveUninitialized: true,
     cookie : {
@@ -43,25 +57,17 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user; // Make current user available in views
     next();
 });
-
-app.get("/demouser", async (req, res) => {
-    let FakeUser = new User({
-        email: "demo@example.com",
-        username: "demo",
-    });
-    let registeredUser = await User.register(FakeUser, "password");
-    res.send(registeredUser);
-});
-
 // Routers
 const listingRouter = require('./routes/listing');
 const reviewRouter = require('./routes/review'); // ✅ NEW
 const userRouter = require('./routes/user'); // Assuming you have a user router
 
+const dbUrl = process.env.ATLAS_URL ;
+
 main().then(() => console.log("connected to db")).catch(err => console.log(err));
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+    await mongoose.connect(dbUrl);
 }
 
 app.engine("ejs", ejsmate);

@@ -1,29 +1,22 @@
 <nav class="navbar navbar-expand-lg sticky-top shadow-sm py-3 border-bottom" style="background-color: white;">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold text-primary" href="/">
-      <i class="fa-solid fa-compass me-1"></i>Explore
+    <a class="navbar-brand fw-bold text-primary" href="/listings">
+      <i class="fa-solid fa-compass me-1"></i>&nbsp &nbsp Explore
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <!-- Left Side -->
-      <div class="navbar-nav">
-        <a class="nav-link fw-medium" href="/">Home</a>
-        <a class="nav-link fw-medium" href="/listings">All Listings</a>
-        <a class="nav-link fw-medium" href="/listings/new">Add New Listing</a>
-      </div>
-
-      <!-- Right Side -->
-      <div class="navbar-nav ms-auto align-items-center">
+        <div class="navbar-nav ms-auto align-items-center">
+        <a class="nav-link fw-medium" href="/listings/new">Airbnb your name</a>
         <% if (!currentUser) { %>
-          <a class="nav-link fw-medium" href="/login">Login</a>
-          <a class="nav-link fw-medium" href="/signup">Signup</a>
+          <a class="nav-link fw-medium" href="/login"><b>Login</b></a>
+          <a class="nav-link fw-medium" href="/signup"><b>Signup</b></a>
         <% } else { %>
           <span class="navbar-text fw-semibold text-secondary me-2">Hi, <%= currentUser.username %>!</span>
           <form action="/logout" method="GET" class="d-inline">
-            <button class="btn btn-outline-danger btn-sm" type="submit">Logout</button>
+            <button class="btn btn-outline-danger btn-sm" type="submit"><b>Logout</b></button>
           </form>
         <% } %>
       </div>
